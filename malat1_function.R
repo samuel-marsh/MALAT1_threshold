@@ -9,7 +9,7 @@
 # abs_min and rough_max help define minimums and maximums when the histogram is wonky
 define_malat1_threshold <- function(counts, bw = 0.1, lwd = 2, breaks = 100,
                                     chosen_min = 1, smooth = 1, abs_min = 0.3,
-                                    rough_max = 2, return_plots = FALSE) {
+                                    rough_max = 2, print_plots = TRUE, return_plots = FALSE) {
   tryCatch({
     # Calculate the density values
     density_data <- density(counts, bw = bw,
@@ -154,7 +154,11 @@ define_malat1_threshold <- function(counts, bw = 0.1, lwd = 2, breaks = 100,
       ggtitle("MALAT1")
 
     plots <- wrap_plots(p1, p2, p3, p4, ncol = 2)
-    plots
+
+    if (isTRUE(x = print_plots)) {
+      print(plots)
+    }
+
     if (isTRUE(x = return_plots)) {
       res <- list("threshold" = x_intercept1,
                   "plots" = plots)
@@ -181,3 +185,4 @@ define_malat1_threshold <- function(counts, bw = 0.1, lwd = 2, breaks = 100,
     return(2)
   })
 }
+
