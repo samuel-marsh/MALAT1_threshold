@@ -153,8 +153,9 @@ define_malat1_threshold <- function(counts, bw = 0.1, lwd = 2, breaks = 100,
       geom_vline(xintercept = x_intercept1, color = "red", linewidth = lwd) +
       ggtitle("MALAT1")
 
+    plots <- wrap_plots(p1, p2, p3, p4, ncol = 2)
+    plots
     if (isTRUE(x = return_plots)) {
-      plots <- wrap_plots(p1, p2, p3, p4, ncol = 2)
       res <- list("threshold" = x_intercept1,
                   "plots" = plots)
       return(res)
